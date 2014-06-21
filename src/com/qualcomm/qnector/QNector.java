@@ -46,6 +46,7 @@ public class QNector extends Activity {
         wksp.setBackgroundResource(R.drawable.breadboard);
         a.addView(wksp);
         
+        showFileSelectorDialog(context);
         
         ImageButton openBttn = (ImageButton) findViewById(R.id.openBttn);
         openBttn.setOnClickListener(new View.OnClickListener() {
@@ -100,5 +101,6 @@ public class QNector extends Activity {
 	
 	private void updateSchematic(){
 		ParseSchematic.go(selectedFile);
+		wksp.update();
 	}
 }

@@ -23,10 +23,13 @@ public class ActiveCanvas extends SurfaceView implements SurfaceHolder.Callback 
         super(context);
         this.getHolder().addCallback(this);
         setFocusable(true);
-        getCircuitsParts();
         paint = new Paint();
         paint.setColor(Color.WHITE);
         
+    }
+    
+    public void update(){
+    	getCircuitsParts();
     }
  
     private void getCircuitsParts() {
@@ -43,6 +46,8 @@ public class ActiveCanvas extends SurfaceView implements SurfaceHolder.Callback 
     }
     @Override
     protected void onDraw(Canvas canvas) {
+    	if(circuitParts == null)
+    		return;
         for(CircuitPart c: circuitParts) {
         	ImageButton img = c.getImage();
         	canvas.drawBitmap(img.getDrawingCache(), img.getX(), img.getY(), null);
@@ -52,11 +57,8 @@ public class ActiveCanvas extends SurfaceView implements SurfaceHolder.Callback 
  
     @Override
     public boolean onTouchEvent(MotionEvent event) {    
-    	Log.d("YOLO", event.getX() + " " + event.getY());
-    	//    	
-//    	if((int)event.getY() > 494)
-//    		return true;
-    	
+    	if(circuitParts == null)
+    		return false;
         for(CircuitPart c: circuitParts){
         	if(c.isSelected((int) event.getX(), (int) event.getY())){
         		c.getImage().setX((int)event.getX());
