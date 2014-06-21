@@ -66,11 +66,22 @@ public class ActiveCanvas extends SurfaceView implements SurfaceHolder.Callback 
         	if(pressed){
         		paint.setColor(Color.GREEN);
         		paint.setStrokeWidth(10.0f);
-            	canvas.drawLine(392, 431, 397, 224, paint);
-            	canvas.drawLine(397, 224, 758, 224, paint);
-            	canvas.drawLine(943, 224, 943, 430, paint);
-            	canvas.drawLine(733, 430, 582, 430, paint);
-            	pressed = true;
+        		if(c.getPartType().equals(CircuitPart.BATTERY)){
+	        		if(c.getImage().getY() > 300){
+		            	canvas.drawLine(392, 431, 397, 224, paint);
+		            	canvas.drawLine(397, 224, 758, 224, paint);
+		            	canvas.drawLine(943, 224, 943, 430, paint);
+		            	canvas.drawLine(733, 430, 582, 430, paint);
+		            	pressed = true;
+	        		} else {
+	                	canvas.drawLine(429,168, 780, 168, paint);
+	                	canvas.drawLine(972,168,972,488, paint);
+	                	canvas.drawLine(434,488,970,488, paint);
+	                	canvas.drawLine(240,488,240,168, paint);
+	                	pressed = true;
+	        		}
+        		}
+	            	
         	}
         	
         	
