@@ -2,14 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_activity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:background="#828282">
+    android:layout_height="match_parent"
+    android:background="#828282" >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="60dp"
-        android:background="@drawable/breadboard" >
+        android:id="@+id/bb">
     </RelativeLayout>
 
     <ImageButton
@@ -18,8 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="30dp"
         android:layout_marginBottom="5dp"
+        android:layout_marginLeft="30dp"
         android:background="#00000000"
         android:src="@drawable/back_to_folder" />
 
@@ -28,8 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="20dp"
         android:layout_marginBottom="5dp"
+        android:layout_marginLeft="20dp"
         android:layout_toRightOf="@id/openBttn"
         android:background="#00000000"
         android:src="@drawable/before_wiring" />

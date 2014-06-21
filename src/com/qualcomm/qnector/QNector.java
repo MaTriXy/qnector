@@ -7,14 +7,19 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 public class QNector extends Activity {
 	private static String TAG = "QNector.java";
@@ -31,10 +36,15 @@ public class QNector extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
                                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_qnector);
         context = this;
         wksp = new ActiveCanvas(this);
-
+        
+        setContentView(R.layout.activity_qnector);
+        RelativeLayout a = (RelativeLayout) findViewById(R.id.bb);
+        wksp.setBackgroundResource(R.drawable.breadboard);
+        a.addView(wksp);
+        
+        
         ImageButton openBttn = (ImageButton) findViewById(R.id.openBttn);
         openBttn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
