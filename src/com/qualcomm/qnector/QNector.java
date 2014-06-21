@@ -23,4 +23,5 @@ public class QNector extends Activity {
         public boolean onOptionsItemSelected(MenuItem item) {
                 return super.onOptionsItemSelected(item);
         }
+
 }
