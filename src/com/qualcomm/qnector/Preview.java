@@ -3,6 +3,7 @@ package com.qualcomm.qnector;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -42,7 +43,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 			camera.setPreviewCallback(new PreviewCallback() {
 
 				public void onPreviewFrame(byte[] data, Camera arg1) {
-					FileOutputStream outStream = null;
+					/*FileOutputStream outStream = null;
 					try {
 						outStream = new FileOutputStream(String.format(
 								"/sdcard/%d.jpg", System.currentTimeMillis()));
@@ -56,7 +57,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 						e.printStackTrace();
 					} finally {
 					}
-					Preview.this.invalidate();
+					Preview.this.invalidate();*/
 				}
 			});
 		} catch (IOException e) {
@@ -73,12 +74,15 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 	}
 
 	public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-		// Now that the size is known, set up the camera parameters and begin
-		// the preview.
-		Camera.Parameters parameters = camera.getParameters();
-		parameters.setPreviewSize(w, h);
-		camera.setParameters(parameters);
-		camera.startPreview();
+	    Camera.Parameters parameters = camera.getParameters();
+	    List<Camera.Size> previewSizes = parameters.getSupportedPreviewSizes();
+
+	    // You need to choose the most appropriate previewSize for your app
+	    Camera.Size previewSize = previewSizes.get(0);
+
+	    parameters.setPreviewSize(previewSize.width, previewSize.height);
+	    camera.setParameters(parameters);
+	    camera.startPreview();
 	}
 
 	@Override
