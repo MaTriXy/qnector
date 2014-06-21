@@ -20,6 +20,7 @@ public class ActiveCanvas extends SurfaceView implements SurfaceHolder.Callback 
     private ArrayList<CircuitPart> circuitParts = new ArrayList<CircuitPart>();
     private Paint paint;
     int mTouched;
+    private boolean pressed = false;
     public ActiveCanvas(Context context) {
         super(context);
         this.getHolder().addCallback(this);
@@ -30,7 +31,10 @@ public class ActiveCanvas extends SurfaceView implements SurfaceHolder.Callback 
     }
     
     public void update(){
+    	circuitParts.clear();
+    	pressed = false;
     	getCircuitsParts();
+    	postInvalidate();
     }
  
     private void getCircuitsParts() {
@@ -44,19 +48,32 @@ public class ActiveCanvas extends SurfaceView implements SurfaceHolder.Callback 
     			circuitParts.add(new Capacitor(this.getContext()));
     		}
     	}
+    	//for(CircuitPart part : circuitParts) {
+    		//part.getImage().getDrawingCache();
+    	//	Log.d(TAG, "mImage == " + (part.getImage() == null));
+    	//}
     }
     @Override
     protected void onDraw(Canvas canvas) {
     	if(circuitParts == null) {
-    		Log.d(TAG, "why is circuitParts null? onDraw");
     		return;
     	}
-    	Log.d(TAG, "onDraw called and circuitParts not null");
         for(CircuitPart c: circuitParts) {
         	ImageButton img = c.getImage();
-        	Log.d(TAG, "supposed to be drawing bitmap");
-        	canvas.drawBitmap(img.getDrawingCache(), img.getX(), img.getY(), null);
+        	Log.d(TAG, "canvas is not null == " + (canvas != null));
+        	canvas.drawBitmap(c.getBitmap(), img.getX(), img.getY(), paint);
         	//canvas.drawBitmap(img.getDrawingCache(), img.getX() - (img.getWidth() / 2), img.getY() - (img.getHeight() / 2), null);
+        	if(pressed){
+        		paint.setColor(Color.GREEN);
+        		paint.setStrokeWidth(10.0f);
+            	canvas.drawLine(392, 431, 397, 224, paint);
+            	canvas.drawLine(397, 224, 758, 224, paint);
+            	canvas.drawLine(943, 224, 943, 430, paint);
+            	canvas.drawLine(733, 430, 582, 430, paint);
+            	pressed = true;
+        	}
+        	
+        	
         }
     }
  
@@ -66,6 +83,7 @@ public class ActiveCanvas extends SurfaceView implements SurfaceHolder.Callback 
     		return false;
         for(CircuitPart c: circuitParts){
         	if(c.isSelected((int) event.getX(), (int) event.getY())){
+        		Log.d(TAG, "YUM");
         		c.getImage().setX((int)event.getX());
         		c.getImage().setY((int)event.getY());
         		this.postInvalidate();
@@ -98,4 +116,20 @@ public class ActiveCanvas extends SurfaceView implements SurfaceHolder.Callback 
     public void surfaceDestroyed(SurfaceHolder holder) {
     }
     
+    public int[] move(float xx, float yy){
+    	int x = (int)xx; int y = (int)yy;
+    	int start_x1 = 168; int start_y = 64;
+    	int start_x2 = 372;
+    	
+    	x = x<168?30*((x-start_x1)/30+start_x1):30*((x-start_x2)/30+start_x2);
+    	y = (y-start_y)/30+start_y;
+    	return new int[] {x, y};
+    }
+    
+    public void drawLines(){
+    	pressed = true;
+    	this.postInvalidate();
+    }
+    
 }
+
