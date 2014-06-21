@@ -26,7 +26,7 @@ public class QNector extends Activity {
 	private final String TAG = "QNector.java";
 	Camera camera;
 	Preview preview;
-	Button buttonClick;
+//	Button buttonClick;
 	
 	private static AlertDialog.Builder builder;
 	private String[] fileList;
@@ -43,51 +43,35 @@ public class QNector extends Activity {
 		preview = new Preview(this);
 		((FrameLayout) findViewById(R.id.preview)).addView(preview);
 
-		buttonClick = (Button) findViewById(R.id.buttonClick);
+		/*buttonClick = (Button) findViewById(R.id.buttonClick);
 		buttonClick.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				preview.camera.takePicture(shutterCallback, rawCallback,
 						jpegCallback);
 			}
-		});
+		});*/
 
 		Log.d(TAG, "onCreate'd");
 	}
 
-	ShutterCallback shutterCallback = new ShutterCallback() {
+	/*ShutterCallback shutterCallback = new ShutterCallback() {
 		public void onShutter() {
 			Log.d(TAG, "onShutter'd");
 		}
-	};
+	};*/
 
 	/** Handles data for raw picture */
-	PictureCallback rawCallback = new PictureCallback() {
+	/*PictureCallback rawCallback = new PictureCallback() {
 		public void onPictureTaken(byte[] data, Camera camera) {
 			Log.d(TAG, "onPictureTaken - raw");
 		}
-	};
+	};*/
 
 	/** Handles data for jpeg picture */
 	PictureCallback jpegCallback = new PictureCallback() {
 		public void onPictureTaken(byte[] data, Camera camera) {
 			FileOutputStream outStream = null;
-			try {
-				// write to local sandbox file system
-				// outStream =
-				// CameraDemo.this.openFileOutput(String.format("%d.jpg",
-				// System.currentTimeMillis()), 0);
-				// Or write to sdcard
-				outStream = new FileOutputStream(String.format(
-						"/sdcard/%d.jpg", System.currentTimeMillis()));
-				outStream.write(data);
-				outStream.close();
-				Log.d(TAG, "onPictureTaken - wrote bytes: " + data.length);
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} finally {
-			}
+			//TODO Analyze jpg here.
 			Log.d(TAG, "onPictureTaken - jpeg");
 		}
 	};
