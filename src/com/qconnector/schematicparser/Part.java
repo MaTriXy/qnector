@@ -5,33 +5,29 @@ public class Part {
 	private String deviceSet;
 	private String device;
 	private String packageType;
-	
+
 	public Part() {
 		name = "";
 		setDeviceSet("");
 		setDevice("");
 		packageType = "";
 	}
-	
-	public Part(String name, String deviceSet, String device)
-	{
+
+	public Part(String name, String deviceSet, String device) {
 		this.name = name;
 		this.setDeviceSet(deviceSet);
 		this.setDevice(device);
 	}
-	
-	public String getName()
-	{
+
+	public String getName() {
 		return this.name;
 	}
-	
-	public String getPackageType()
-	{
+
+	public String getPackageType() {
 		return this.packageType;
 	}
-	
-	public void setPackageType(String type)
-	{
+
+	public void setPackageType(String type) {
 		this.packageType = type;
 	}
 
