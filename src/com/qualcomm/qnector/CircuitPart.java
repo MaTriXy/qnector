@@ -1,6 +1,7 @@
 package com.qualcomm.qnector;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.ImageButton;
 
 public abstract class CircuitPart {
@@ -11,10 +12,12 @@ public abstract class CircuitPart {
 	private String partType;
 	private ImageButton mImage;
 
-	public CircuitPart(String partType, int id, Context context) {
+	public CircuitPart(String partType, int id, Context context, float x, float y) {
 		this.partType = partType;
 		mImage = new ImageButton(context);
 		mImage.setImageDrawable(context.getResources().getDrawable(id));
+		mImage.setX(x);
+		mImage.setY(y);
 	}
 
 	public String getPartType() {
@@ -43,18 +46,21 @@ public abstract class CircuitPart {
 
 class Resistor extends CircuitPart {
 	public Resistor(Context context) {
-		super(RESISTOR, R.drawable.resistor, context);
+		super(RESISTOR, R.drawable.resistor, context, 1100, 700);
+		Log.d("CircuitPart:", "Resistor instantiated");
 	}
 }
 
 class Capacitor extends CircuitPart {
 	public Capacitor(Context context) {
-		super(CAPACITOR, R.drawable.capacitor, context);
+		super(CAPACITOR, R.drawable.capacitor, context, 850, 700);
+		Log.d("CircuitPart:", "Capacitor instantiated");
 	}
 }
 
 class Battery extends CircuitPart {
 	public Battery(Context context) {
-		super(BATTERY, R.drawable.battery, context);
+		super(BATTERY, R.drawable.battery, context, 600, 700);
+		Log.d("CircuitPart:", "Battery instantiated");
 	}
 }

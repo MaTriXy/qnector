@@ -16,7 +16,8 @@ import com.qconnector.schematicparser.ParseSchematic;
 import com.qconnector.schematicparser.Part;
  
 public class ActiveCanvas extends SurfaceView implements SurfaceHolder.Callback {
-    private ArrayList<CircuitPart> circuitParts;
+	private static final String TAG = "ActiveCanvas.java";
+    private ArrayList<CircuitPart> circuitParts = new ArrayList<CircuitPart>();
     private Paint paint;
     int mTouched;
     public ActiveCanvas(Context context) {
@@ -35,21 +36,25 @@ public class ActiveCanvas extends SurfaceView implements SurfaceHolder.Callback 
     private void getCircuitsParts() {
     	ArrayList<Part> parts = ParseSchematic.getPartsList();
     	for(Part part : parts) {
-    		if(part.getName().equals(CircuitPart.RESISTOR)) {
+    		if(part.getName().charAt(0) == 'R') {
     			circuitParts.add(new Resistor(this.getContext()));
-    		} else if(part.getName().equals(CircuitPart.BATTERY)) {
+    		} else if(part.getName().charAt(0) == 'B') {
     			circuitParts.add(new Battery(this.getContext()));
-    		} else if(part.getName().equals(CircuitPart.CAPACITOR)) {
+    		} else if(part.getName().charAt(0) == 'C') {
     			circuitParts.add(new Capacitor(this.getContext()));
     		}
     	}
     }
     @Override
     protected void onDraw(Canvas canvas) {
-    	if(circuitParts == null)
+    	if(circuitParts == null) {
+    		Log.d(TAG, "why is circuitParts null? onDraw");
     		return;
+    	}
+    	Log.d(TAG, "onDraw called and circuitParts not null");
         for(CircuitPart c: circuitParts) {
         	ImageButton img = c.getImage();
+        	Log.d(TAG, "supposed to be drawing bitmap");
         	canvas.drawBitmap(img.getDrawingCache(), img.getX(), img.getY(), null);
         	//canvas.drawBitmap(img.getDrawingCache(), img.getX() - (img.getWidth() / 2), img.getY() - (img.getHeight() / 2), null);
         }

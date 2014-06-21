@@ -73,7 +73,7 @@ public class QNector extends Activity {
 			FilenameFilter filter = new FilenameFilter() {
 				public boolean accept(File dir, String filename) {
 					File select = new File(dir, filename);
-					return filename.contains(".sch") || select.isDirectory();
+					return filename.contains(".xml") || select.isDirectory();
 				}
 			};
 			fileList = path.list(filter);
@@ -91,7 +91,7 @@ public class QNector extends Activity {
 		}
 		builder.setItems(fileList, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                selectedFile = new File(fileList[which]);
+                selectedFile = new File(Environment.getExternalStorageDirectory() + "/qnector/" + fileList[which]);
                 updateSchematic();
             }
         });
@@ -100,6 +100,7 @@ public class QNector extends Activity {
 	}
 	
 	private void updateSchematic(){
+		Log.d(TAG, "update schematic");
 		ParseSchematic.go(selectedFile);
 		wksp.update();
 	}
