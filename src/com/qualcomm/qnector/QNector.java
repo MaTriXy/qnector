@@ -77,9 +77,8 @@ public class QNector extends Activity {
 				// CameraDemo.this.openFileOutput(String.format("%d.jpg",
 				// System.currentTimeMillis()), 0);
 				// Or write to sdcard
-				outStream = new FileOutputStream(String.format(
-						"/sdcard/%d.jpg", System.currentTimeMillis()));
-				outStream.write(data);
+				outStream = new FileOutputStream(String.format("/sdcard/%d.jpg", System.currentTimeMillis()));
+				//outStream.write(data);
 				outStream.close();
 				Log.d(TAG, "onPictureTaken - wrote bytes: " + data.length);
 			} catch (FileNotFoundException e) {
