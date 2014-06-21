@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -51,7 +52,8 @@ public class ActiveCanvas extends SurfaceView implements SurfaceHolder.Callback 
  
     @Override
     public boolean onTouchEvent(MotionEvent event) {    
-//    	
+    	Log.d("YOLO", event.getX() + " " + event.getY());
+    	//    	
 //    	if((int)event.getY() > 494)
 //    		return true;
     	
