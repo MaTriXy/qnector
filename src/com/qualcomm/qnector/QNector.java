@@ -57,7 +57,7 @@ public class QNector extends Activity {
         ImageButton goBttn = (ImageButton) findViewById(R.id.goBttn);
         goBttn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	//TODO
+            	wksp.drawLines();
             }
         });
 	}

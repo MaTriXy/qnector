@@ -40,36 +40,35 @@ public abstract class CircuitPart {
 	public boolean isSelected(int x, int y) {
 		float imgX = mImage.getX();
 		float imgY = mImage.getY();
-		int width = mImage.getWidth();
-		int height = mImage.getHeight();
-		// return ( (x >= (imgX - halfWidth + 10)
-		// && x <= (imgX + halfWidth - 10))
-		// && (y >= (imgY - halfHeight + 10)
-		// && y <= (imgY + halfHeight - 10)) );
-		// TODO Handle stack of images
-		return x >= imgX && x <= imgX + width && y >= imgY
-				&& y <= imgY + height;
+		int width = mImage.getWidth()+300;
+		int height = mImage.getHeight()+300;
+		int halfWidth = width/2;
+		int halfHeight = height/2;
+		 return ( (x >= (imgX - halfWidth + 10)
+		 && x <= (imgX + halfWidth - 10))
+		 && (y >= (imgY - halfHeight + 10)
+		 && y <= (imgY + halfHeight - 10)) );
 	}
 
 }
 
 class Resistor extends CircuitPart {
 	public Resistor(Context context) {
-		super(RESISTOR, R.drawable.resistor, context, 1100, 700);
+		super(RESISTOR, R.drawable.resistor, context, 1000, 550);
 		Log.d("CircuitPart:", "Resistor instantiated");
 	}
 }
 
 class Capacitor extends CircuitPart {
 	public Capacitor(Context context) {
-		super(CAPACITOR, R.drawable.capacitor, context, 850, 700);
+		super(CAPACITOR, R.drawable.capacitor, context, 800, 550);
 		Log.d("CircuitPart:", "Capacitor instantiated");
 	}
 }
 
 class Battery extends CircuitPart {
 	public Battery(Context context) {
-		super(BATTERY, R.drawable.battery, context, 600, 700);
+		super(BATTERY, R.drawable.battery, context, 700, 525);
 		Log.d("CircuitPart:", "Battery instantiated");
 	}
 }
