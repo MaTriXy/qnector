@@ -11,19 +11,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class ParseSchematic {
-	public static void go() {
+	public static void go(File fXmlFile) {
 		try {
-			File fXmlFile = new File(
-					"C:/Users/Jake/Documents/2013-2014/ECE362/Eagle/simple/2Rinplane.xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
 			doc.getDocumentElement().normalize();
-
 			ArrayList<Part> parts = getPartsList(doc);
 			ArrayList<Part> tempParts = (ArrayList<Part>) parts.clone();
-
 			NodeList nl = doc.getElementsByTagName("device");
 			for (int i = 0; i < nl.getLength(); i++) {
 				Node nDevice = nl.item(i);
