@@ -10,20 +10,36 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.ImageButton;
+
+import com.qconnector.schematicparser.ParseSchematic;
+import com.qconnector.schematicparser.Part;
  
 public class ActiveCanvas extends SurfaceView implements SurfaceHolder.Callback {
-    private ArrayList<CircuitPart> circuitParts = new ArrayList<CircuitPart>();
+    private ArrayList<CircuitPart> circuitParts;
     private Paint paint;
     int mTouched;
     public ActiveCanvas(Context context) {
         super(context);
         this.getHolder().addCallback(this);
         setFocusable(true);
+        getCircuitsParts();
         paint = new Paint();
         paint.setColor(Color.WHITE);
         
     }
  
+    private void getCircuitsParts() {
+    	ArrayList<Part> parts = ParseSchematic.getPartsList();
+    	for(Part part : parts) {
+    		if(part.getName().equals(CircuitPart.RESISTOR)) {
+    			circuitParts.add(new Resistor(this.getContext()));
+    		} else if(part.getName().equals(CircuitPart.BATTERY)) {
+    			circuitParts.add(new Battery(this.getContext()));
+    		} else if(part.getName().equals(CircuitPart.CAPACITOR)) {
+    			circuitParts.add(new Capacitor(this.getContext()));
+    		}
+    	}
+    }
     @Override
     protected void onDraw(Canvas canvas) {
         for(CircuitPart c: circuitParts) {

@@ -2,6 +2,8 @@ package com.qualcomm.qnector;
 import java.io.File;
 import java.io.FilenameFilter;
 
+import com.qconnector.schematicparser.ParseSchematic;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -87,6 +89,6 @@ public class QNector extends Activity {
 	}
 	
 	private void updateSchematic(){
-		//TODO on dialog selection
+		ParseSchematic.go(selectedFile);
 	}
 }
