@@ -31,6 +31,7 @@ public class ActiveCanvas extends SurfaceView implements SurfaceHolder.Callback 
     
     public void update(){
     	getCircuitsParts();
+    	postInvalidate();
     }
  
     private void getCircuitsParts() {
@@ -44,6 +45,10 @@ public class ActiveCanvas extends SurfaceView implements SurfaceHolder.Callback 
     			circuitParts.add(new Capacitor(this.getContext()));
     		}
     	}
+    	//for(CircuitPart part : circuitParts) {
+    		//part.getImage().getDrawingCache();
+    	//	Log.d(TAG, "mImage == " + (part.getImage() == null));
+    	//}
     }
     @Override
     protected void onDraw(Canvas canvas) {
@@ -54,8 +59,8 @@ public class ActiveCanvas extends SurfaceView implements SurfaceHolder.Callback 
     	Log.d(TAG, "onDraw called and circuitParts not null");
         for(CircuitPart c: circuitParts) {
         	ImageButton img = c.getImage();
-        	Log.d(TAG, "supposed to be drawing bitmap");
-        	canvas.drawBitmap(img.getDrawingCache(), img.getX(), img.getY(), null);
+        	Log.d(TAG, "canvas is not null == " + (canvas != null));
+        	canvas.drawBitmap(c.getBitmap(), img.getX(), img.getY(), paint);
         	//canvas.drawBitmap(img.getDrawingCache(), img.getX() - (img.getWidth() / 2), img.getY() - (img.getHeight() / 2), null);
         }
     }

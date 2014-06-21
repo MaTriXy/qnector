@@ -1,6 +1,8 @@
 package com.qualcomm.qnector;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.widget.ImageButton;
 
@@ -8,22 +10,29 @@ public abstract class CircuitPart {
 	public static final String RESISTOR = "Resistor";
 	public static final String CAPACITOR = "Capacitor";
 	public static final String BATTERY = "Battery";
-
+	private Context context;
 	private String partType;
 	private ImageButton mImage;
-
+	private int id;
+	
 	public CircuitPart(String partType, int id, Context context, float x, float y) {
+		this.context = context;
 		this.partType = partType;
 		mImage = new ImageButton(context);
 		mImage.setImageDrawable(context.getResources().getDrawable(id));
 		mImage.setX(x);
 		mImage.setY(y);
+		this.id = id;
 	}
 
 	public String getPartType() {
 		return partType;
 	}
 
+	public Bitmap getBitmap() {
+		return BitmapFactory.decodeResource(context.getResources(), id);
+	}
+	
 	public ImageButton getImage() {
 		return mImage;
 	}
