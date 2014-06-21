@@ -35,6 +35,10 @@
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="landscape" >
         </activity>
+        <activity android:name=".BreadBoard"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="landscape" >
+       </activity>
     </application>
 
 </manifest>

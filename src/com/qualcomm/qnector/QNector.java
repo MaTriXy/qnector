@@ -1,16 +1,15 @@
 package com.qualcomm.qnector;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
-import java.io.IOException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
@@ -27,27 +26,29 @@ public class QNector extends Activity {
 	Camera camera;
 	Preview preview;
 	Button buttonClick;
-	
+	Context mContext;
 	private static AlertDialog.Builder builder;
 	private String[] fileList;
 	private File selectedFile;
-
+	private Intent intent;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_qnector);
-
-		showFileSelectorDialog(this);
 		
+		showFileSelectorDialog(this);
+		mContext = this;
 		preview = new Preview(this);
 		((FrameLayout) findViewById(R.id.preview)).addView(preview);
 
 		buttonClick = (Button) findViewById(R.id.button_click);
 		buttonClick.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
+				intent = new Intent(mContext, BreadBoard.class);
 				preview.camera.takePicture(shutterCallback, rawCallback,
 						jpegCallback);
+		        startActivity(intent);
 			}
 		});
 
@@ -71,7 +72,7 @@ public class QNector extends Activity {
 	PictureCallback jpegCallback = new PictureCallback() {
 		public void onPictureTaken(byte[] data, Camera camera) {
 			FileOutputStream outStream = null;
-			//TODO Analyze jpg here.
+			intent.putExtra("breadboard", data);
 			Log.d(TAG, "onPictureTaken - jpeg");
 		}
 	};
