@@ -98,4 +98,14 @@ public class ActiveCanvas extends SurfaceView implements SurfaceHolder.Callback 
     public void surfaceDestroyed(SurfaceHolder holder) {
     }
     
+    public int[] move(float xx, float yy){
+    	int x = (int)xx; int y = (int)yy;
+    	int start_x1 = 168; int start_y = 64;
+    	int start_x2 = 372;
+    	
+    	x = x<168?30*((x-start_x1)/30+start_x1):30*((x-start_x2)/30+start_x2);
+    	y = (y-start_y)/30+start_y;
+    	return new int[] {x, y};
+    }
+    
 }
