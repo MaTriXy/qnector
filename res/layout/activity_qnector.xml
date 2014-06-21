@@ -5,12 +5,26 @@
     android:id="@+id/main_activity"
     android:background="#FFFFFF" >
 
-    <TextView
-        android:id="@+id/textView1"
+    <ImageButton
+        android:id="@+id/openBttn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="Hello World....I guess" />
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="#00000000"
+        android:src="@drawable/back_to_folder" />
+
+    <ImageButton
+        android:id="@+id/goBttn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/openBttn"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#00000000"
+        android:src="@drawable/before_wiring" />
 
 </RelativeLayout>
