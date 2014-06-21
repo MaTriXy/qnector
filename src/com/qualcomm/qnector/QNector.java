@@ -38,7 +38,7 @@ public class QNector extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_qnector);
 
-		//showFileSelectorDialog(this);
+		showFileSelectorDialog(this);
 		
 		preview = new Preview(this);
 		((FrameLayout) findViewById(R.id.preview)).addView(preview);

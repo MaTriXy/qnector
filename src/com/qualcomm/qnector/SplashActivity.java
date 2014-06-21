@@ -1,21 +1,30 @@
 package com.qualcomm.qnector;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class SplashActivity extends Activity {
-
+	private Context context;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
-
-		Intent intent = new Intent(this, QNector.class);
-		startActivity(intent);
-		finish();
+		context = this;
+		
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run() {
+                Intent intent = new Intent(context, QNector.class);
+                startActivity(intent);
+                finish();
+            }
+        }, 1500);
 	}
 
 	@Override
