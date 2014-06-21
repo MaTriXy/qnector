@@ -1,7 +1,5 @@
 package com.qualcomm.qnector;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -10,6 +8,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.hardware.Camera;
+import android.hardware.Camera.AutoFocusCallback;
+import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PreviewCallback;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -39,9 +39,8 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 		camera = Camera.open();
 		try {
 			camera.setPreviewDisplay(holder);
-
+			
 			camera.setPreviewCallback(new PreviewCallback() {
-
 				public void onPreviewFrame(byte[] data, Camera arg1) {
 				}
 			});
@@ -66,6 +65,8 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 	    Camera.Size previewSize = previewSizes.get(0);
 
 	    parameters.setPreviewSize(previewSize.width, previewSize.height);
+		parameters.setFocusMode(Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+
 	    camera.setParameters(parameters);
 	    camera.startPreview();
 	}
