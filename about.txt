@@ -1,0 +1,9 @@
+The goal of this Android application project is to do the following:
+
+1) Parse through a circuit schematic (XML file) and structure the data from the nets (connections that can be between 2+ nodes) defined by the schematic author
+
+2) Allow the user to select where they want to place nodes on a virtual breadboard (displayed on app)
+
+3) The app connects the user-placed nodes so the circuit matches the connections of the original schematic. The app displays the suggested wire locations on the app.
+
+4) Now, the user is able to connect their circuit on a breadboard by following the connections displayed on the app.
